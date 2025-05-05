@@ -1,6 +1,6 @@
 ---
 
-# 🏎️ LapML: ARIMA-LSTM Time Series Modeling for F1 Lap Prediction
+## 🏎️ LapML: ARIMA-LSTM Time Series Modeling for F1 Lap Prediction
 
 LapML is a predictive analytics system built for **Formula 1 lap time forecasting** using hybrid approaches: statistical modeling (**ARIMA**) and deep learning (**LSTM**). The system simulates and predicts next lap times using real race data and provides a platform to compare model performances in a motorsport context.
 
