@@ -1,0 +1,95 @@
+{% extends 'race/base.html' %}
+{% load static %}
+
+{% block title %}LapML: ARIMA-LSTM Time Series for F1{% endblock %}
+
+{% block content %}
+<div class="f1-header mb-5">
+    <h1 class="text-center">Welcome to LapML</h1>
+    <p class="text-center subtitle">Advanced Race Simulation & Lap Time Prediction</p>
+</div>
+
+<div class="row">
+    <div class="col-md-6 mb-4">
+        <div class="f1-card h-100">
+            <div class="card-body">
+                <h3 class="f1-title mb-4">
+                    <i class="fas fa-chart-line me-2"></i>ARIMA Simulation
+                </h3>
+                <p class="mb-4">Experience our ARIMA-based race simulation that predicts lap times using advanced time series analysis. Perfect for understanding race pace and performance trends.</p>
+                <a href="{% url 'race_simulation' %}" class="f1-button btn btn-primary w-100">
+                    <i class="fas fa-play me-2"></i>Start ARIMA Simulation
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6 mb-4">
+        <div class="f1-card h-100">
+            <div class="card-body">
+                <h3 class="f1-title mb-4">
+                    <i class="fas fa-brain me-2"></i>LSTM Simulation
+                </h3>
+                <p class="mb-4">Explore our LSTM-based deep learning model for more accurate lap time predictions. Leveraging neural networks to capture complex patterns in race data.</p>
+                <a href="{% url 'lstm_simulation' %}" class="f1-button btn btn-primary w-100">
+                    <i class="fas fa-play me-2"></i>Start LSTM Simulation
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="f1-card">
+            <div class="card-body">
+                <h3 class="f1-title mb-4">
+                    <i class="fas fa-info-circle me-2"></i>About LapML
+                </h3>
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <div class="feature-item text-center">
+                            <i class="fas fa-chart-bar fa-3x mb-3" style="color: var(--f1-red);"></i>
+                            <h4 class="f1-title">ARIMA Analysis</h4>
+                            <p>Advanced time series analysis for lap time prediction</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="feature-item text-center">
+                            <i class="fas fa-brain fa-3x mb-3" style="color: var(--f1-red);"></i>
+                            <h4 class="f1-title">LSTM Networks</h4>
+                            <p>Deep learning for complex pattern recognition</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="feature-item text-center">
+                            <i class="fas fa-tachometer-alt fa-3x mb-3" style="color: var(--f1-red);"></i>
+                            <h4 class="f1-title">Real-time Analysis</h4>
+                            <p>Live race simulation and performance metrics</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.feature-item {
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.feature-item p {
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 1rem;
+}
+</style>
+{% endblock %} 
