@@ -1,178 +1,139 @@
-Certainly! Based on all the work we've done over the past few months, here’s a comprehensive **README** for your project, including all the steps, implementation details, and instructions.
+---
+
+# 🏎️ LapML: ARIMA-LSTM Time Series Modeling for F1 Lap Prediction
+
+LapML is a predictive analytics system built for **Formula 1 lap time forecasting** using hybrid approaches: statistical modeling (**ARIMA**) and deep learning (**LSTM**). The system simulates and predicts next lap times using real race data and provides a platform to compare model performances in a motorsport context.
 
 ---
 
-# **GeoPredict: Earthquake and Storm Disaster Management**
+## 📌 Project Goals
 
-## **Overview**
-
-**GeoPredict** is an interactive web application designed to predict natural disasters, specifically earthquakes and heavy storms (rainfall). Built using Django, this application integrates real-time data collection, time-series forecasting using ARIMA models, and machine learning (LSTM) for event prediction. GeoPredict provides an interactive dashboard to display live disaster data and predictions, enabling early alerts and better disaster management.
-
----
-
-## **Features**
-
-* **Earthquake and Storm Prediction**: Predicts the occurrence and intensity of earthquakes and heavy storms using time series analysis and machine learning models.
-* **Real-time Data Collection**: Fetches real-time disaster data via APIs (e.g., Ergast API for lap times, weather data, etc.).
-* **ARIMA-based Time Series Prediction**: Uses ARIMA models for forecasting earthquake and storm events based on historical data.
-* **LSTM Model for Lap Time Prediction**: Uses an LSTM model for predicting future lap times during race simulations.
-* **Interactive Dashboard**: Displays predictions, real-time data, and other statistics to users in an easy-to-understand interface.
+* Predict F1 driver lap times using historical data.
+* Compare ARIMA vs LSTM for time series forecasting.
+* Analyze error metrics and race patterns dynamically.
+* Serve as a research-ready simulation for motorsport ML applications.
 
 ---
 
-## **Technologies Used**
+## ⚙️ How It Works
 
-* **Backend**: Django, Python
-* **Machine Learning**: ARIMA (AutoRegressive Integrated Moving Average), LSTM (Long Short-Term Memory)
-* **Data Storage**: SQLite (for development), PostgreSQL (for production)
-* **Frontend**: HTML, CSS, JavaScript, Bootstrap (for responsive design)
-* **API Integrations**: Ergast API (race data), Weather API (for storm data), etc.
-* **Data Science Libraries**: NumPy, Pandas, Statsmodels, Scikit-learn, Torch
+1. **Data Collection**
+   Lap times are retrieved from the **Ergast API** or a local database and converted to seconds.
 
----
+2. **Modeling & Prediction**
 
-## **Installation and Setup**
+   * **ARIMA** handles sequential forecasting with AIC-based tuning.
+   * **LSTM** is trained on windowed lap data using a lookback mechanism.
+   * From lap 16 onward, both models are used for side-by-side comparison.
 
-### **Requirements**
-
-Before you begin, ensure that you have the following installed:
-
-* Python 3.x
-* Django 3.x or higher
-* Pandas, NumPy, Matplotlib, Statsmodels, Scikit-learn, Torch
-* PostgreSQL (optional for production)
-
-### **Steps for Installation**
-
-1. **Clone the repository**:
-
-   ```bash
-   git clone https://github.com/yourusername/geopredict.git
-   cd geopredict
-   ```
-
-2. **Set up a virtual environment**:
-
-   ```bash
-   python3 -m venv env
-   source env/bin/activate  # On Windows: env\Scripts\activate
-   ```
-
-3. **Install dependencies**:
-
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. **Set up the database**:
-
-   * For development, SQLite is used by default.
-   * To use PostgreSQL, update the `DATABASES` settings in `settings.py`.
-
-5. **Run database migrations**:
-
-   ```bash
-   python manage.py migrate
-   ```
-
-6. **Create a superuser** to access the Django admin:
-
-   ```bash
-   python manage.py createsuperuser
-   ```
-
-7. **Start the development server**:
-
-   ```bash
-   python manage.py runserver
-   ```
-
-8. **Access the app**:
-   Open your browser and go to `http://127.0.0.1:8000` to view the project.
+3. **Evaluation & Output**
+   Metrics like **RMSE**, **MSE**, **MAE**, and **prediction error %** are computed and visualized.
 
 ---
 
-## **How It Works**
+## 🔧 Installation
 
-1. **Data Collection**:
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/LapML.git
+cd LapML
 
-   * Earthquake data is fetched using a third-party API (e.g., Ergast for racing-related data).
-   * Storm data is fetched from relevant meteorological APIs.
-   * Data is stored in the database for prediction.
+# Create a virtual environment
+python -m venv venv
+source venv/bin/activate   # On Windows use venv\Scripts\activate
 
-2. **Time Series Prediction**:
+# Install required packages
+pip install -r requirements.txt
 
-   * The **ARIMA model** is used to predict the future behavior of earthquakes and storms based on historical data. The model is implemented and trained using the `statsmodels` library.
+# Run the Django server
+python manage.py runserver
+```
 
-3. **Lap Time Prediction**:
-
-   * The **LSTM model** is used for predicting future lap times in racing simulations.
-   * The LSTM model is trained using historical lap times and used to forecast future laps.
-
-4. **Prediction**:
-
-   * Once the necessary data is collected, the system predicts future events (earthquakes, storms, and lap times) using the ARIMA or LSTM models.
-   * Results are displayed in real-time on the dashboard.
+> Note: Ensure you have Python 3.8+ and pip installed.
 
 ---
 
-## **Key Functions**
+## 🚀 Usage
 
-### 1. **`create_lstm_model()`**
-
-* Creates an LSTM model for lap time prediction. Configures the model’s input size, hidden layer size, number of layers, and output size.
-
-### 2. **`prepare_lstm_data()`**
-
-* Prepares data for LSTM by converting lap times into seconds and normalizing them for model input.
-
-### 3. **`train_lstm_model()`**
-
-* Trains the LSTM model on the provided data, optimizing the model’s weights using the backpropagation algorithm.
-
-### 4. **`predict_next_lap_time()`** (ARIMA)
-
-* Uses the ARIMA model to predict the next lap time based on historical data.
-* Converts lap times into seconds and applies the ARIMA model to forecast future times.
-
-### 5. **`predict_next_lap_lstm()`** (LSTM)
-
-* Predicts the next lap time using the trained LSTM model, based on the last `n` lap times.
-
-### 6. **`lstm_simulation()`**
-
-* Manages the entire lap time prediction simulation.
-* Fetches lap times from the database or API, processes them, and predicts future lap times.
-* Calculates error metrics (e.g., MSE, RMSE) for performance evaluation.
+1. Visit `http://127.0.0.1:8000/lstm_simulation/`
+2. Select a race and driver combination.
+3. View real-time model predictions (ARIMA vs LSTM).
+4. Analyze lap-wise predictions, actual values, and metrics.
+5. Export results for future research.
 
 ---
 
-## **Statistics and Metrics**
+## 🧪 Model Comparison
 
-The app calculates various statistics for the race or disaster predictions, including:
-
-* **Fastest Lap**: The fastest lap time from the provided data.
-* **Average Lap Time**: The average lap time of all valid laps.
-* **Prediction Error**: The absolute difference between predicted and actual lap times.
-* **MSE (Mean Squared Error)**: The average of the squared differences between the predicted and actual lap times.
-* **RMSE (Root Mean Squared Error)**: The square root of the MSE, representing the model’s accuracy in predicting future lap times.
-
----
-
-## **Contribution Guidelines**
-
-Feel free to contribute to this project by forking it, creating a new branch, and submitting a pull request. Here’s how you can contribute:
-
-1. Fork the repository.
-2. Create a new feature branch (`git checkout -b feature-name`).
-3. Commit your changes (`git commit -m 'Add feature'`).
-4. Push to the branch (`git push origin feature-name`).
-5. Open a pull request.
+| Feature       | ARIMA                        | LSTM                           |
+| ------------- | ---------------------------- | ------------------------------ |
+| Type          | Statistical (AutoRegressive) | Deep Learning (Recurrent NN)   |
+| Best For      | Stationary sequences         | Non-linear, long-term patterns |
+| Requires      | Small, clean datasets        | Large historical datasets      |
+| In LapML Used | Lap 10+ onward               | Lap 16+ onward                 |
 
 ---
 
-## **License**
+## 📈 Results Summary
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+* **ARIMA** yields decent short-term forecasts but lacks adaptability to racing dynamics.
+* **LSTM** adapts to trends better but needs enough data (15+ laps) and training time.
+* A **hybrid approach** using average + model-based predictions ensures smooth accuracy.
 
 ---
+
+## 📷 Screenshots
+
+
+![ss1](images/p1.png) 
+![ss2](images/p2-1.png) 
+![ss3](images/p2-2.png) 
+![ss4](images/p3.png) 
+
+---
+
+## 💡 Future Enhancements
+
+* Use **telemetry data** (speed, tire wear, pit stops).
+* Introduce **transformer-based models** like Time Series Transformers.
+* Host live dashboards for real-time F1 events.
+* Add weather-based feature engineering.
+
+---
+
+## 🧠 Tech Stack
+
+* **Backend:** Django, Python 3.9
+* **ML Libraries:** scikit-learn, PyTorch, statsmodels
+* **API:** Ergast Developer API
+* **Visualization:** Chart.js, Plotly
+
+---
+
+## 📂 Directory Structure
+
+```
+LapML/
+├── lapml/
+│   ├── views.py
+│   ├── models.py
+│   ├── utils/
+│   │   ├── lstm_utils.py
+│   │   └── arima_utils.py
+├── templates/
+│   └── race/lstm_simulation.html
+├── static/
+│   └── charts/
+└── screenshots/
+    ├── ss1.png
+    ├── ss2.png
+    ├── ss3.png
+    └── ss4.png
+```
+
+---
+
+## 👨‍💻 Author
+
+Developed by **\[Your Name]**, Computer Science student at Vishwakarma University, 2025.
+A project under *Lap Time Forecasting* and *Time Series ML for Motorsport*.
