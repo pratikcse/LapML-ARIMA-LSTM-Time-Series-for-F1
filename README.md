@@ -135,5 +135,5 @@ LapML/
 
 ## 👨‍💻 Author
 
-Developed by **\[Your Name]**, Computer Science student at Vishwakarma University, 2025.
+Developed by Pratik Rane, Avni Jain, Chaitanya Gidwani, Prathmesh, Computer Science students at Vishwakarma University, 2025.
 A project under *Lap Time Forecasting* and *Time Series ML for Motorsport*.
